@@ -95,7 +95,3 @@ Este proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para más 
 **Harold-ESC**
 - Estudiante de Ciencias de la Computación en la Universidad Nacional de Colombia (Unal)
 - GitHub: [@Harold-ESC](https://github.com/Harold-ESC)
-
----
-
-Si este proyecto te resulta útil, ¡dale una estrella en GitHub!
