@@ -7,30 +7,49 @@
  * 
  */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Clock } from 'lucide-react';
 
 export function ActivityCard({ activity, dayName, isDarkMode, timeRemaining, onClick }) {
+  const [currentTime, setCurrentTime] = useState('');
 
-  if (!activity) return null;// Manejo de ausencia de actividad
+  // Actualizar la hora cada minuto
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      setCurrentTime(`${hours}:${minutes}`);
+    };
 
-// ESTILOS DINÁMICOS
+    // Actualizar inmediatamente
+    updateTime();
+    
+    // Actualizar cada minuto
+    const intervalId = setInterval(updateTime, 60000);
+    
+    // Limpiar intervalo al desmontar
+    return () => clearInterval(intervalId);
+  }, []);
+
+  if (!activity) return null;
+
+  // ESTILOS DINÁMICOS
   const cardStyle = {
     backgroundColor: isDarkMode ? '#1e293b' : 'white',
     borderLeftColor: activity.color
-  }; // Estilos dinámicos para la tarjeta principal
+  };
 
   const timeBadgeStyle = {
-    backgroundColor: `${activity.color}33`, // 20% de opacidad (hex 33)
+    backgroundColor: `${activity.color}33`,
     color: activity.color
-  }; // Estilos dinámicos para la etiqueta de hora de finalización
+  };
 
   const progressBarStyle = {
-    width: '60%', // Valor por defecto - idealmente vendría de props
+    width: '60%',
     backgroundColor: activity.color
-  }; // Estilos dinámicos para la barra de progreso
+  };
 
-// RENDERIZADO
   return (
     <div
       className={`
@@ -73,14 +92,14 @@ export function ActivityCard({ activity, dayName, isDarkMode, timeRemaining, onC
           </p>
         </div>
 
-        {/* HORA DE FINALIZACIÓN */}
+        {/* HORA ACTUAL DEL SISTEMA */}
         <div className="text-right ml-4">
           <span 
             className="text-xs font-bold px-2 py-1 rounded-full bg-opacity-20"
             style={timeBadgeStyle}
-            aria-label={`Finaliza a las ${activity.end}`}
+            aria-label={`Hora actual: ${currentTime}`}
           >
-            {activity.end}
+            {currentTime}
           </span>
         </div>
       </div>
