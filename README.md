@@ -42,11 +42,11 @@ npm install
 npm run dev
 ```
 
-La aplicación se ejecutará en `http://localhost:5173`
+La aplicación se ejecutará en `http://localhost:3000`
 
 ## Personalización de Horarios
 
-Actualmente, puedes configurar tus rutinas editando el objeto WEEKLY_SCHEDULE en src/App.jsx. Cada actividad sigue esta estructura:
+Actualmente, puedes configurar tus rutinas editando el objeto WEEKLY_SCHEDULE en src/utils.js. Cada actividad sigue esta estructura:
 
 {
   id: 'work_block',           // Identificador único
